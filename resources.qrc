@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>hoge.vert</file>
+        <file>hoge.frag</file>
+    </qresource>
+</RCC>
