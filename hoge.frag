@@ -50,7 +50,7 @@ float map(vec3 pos)
 
 vec3 normal(vec3 pos)
 {
-	float delta = 0.001;
+	float delta = 0.01;
 	return normalize(vec3(
 						 map(pos + vec3(delta, 0.0, 0.0)) - map(pos - vec3(delta, 0.0, 0.0)),
 						 map(pos + vec3(0.0, delta, 0.0)) - map(pos - vec3(0.0, delta, 0.0)),
@@ -71,9 +71,9 @@ void main()
 	cameraPosition = rotate(cameraPosition, r, vec3(0, 1, 0));
 	rayDirection = rotate(rayDirection, r, vec3(0, 1, 0));
 	vec3 color = vec3(0.0);
-	for (int i = 0; i < 200; i++) {
+	for (int i = 0; i < 100; i++) {
 		float dist = map(cameraPosition);
-		if (dist < 0.00001) {
+		if (dist < 0.0001) {
 			vec3 normal = normal(cameraPosition);
 			float level = dot(normal, lightDirection);
 			color = vec3(level / 2 + 0.3) + vec3(0.1, 0.2, 0.4);
