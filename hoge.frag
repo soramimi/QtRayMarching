@@ -1,4 +1,4 @@
-#version 330
+#version 400
 layout(location = 0) out vec4 fragColor;
 uniform float time;
 uniform vec2 resolution;
@@ -71,9 +71,9 @@ void main()
 	cameraPosition = rotate(cameraPosition, r, vec3(0, 1, 0));
 	rayDirection = rotate(rayDirection, r, vec3(0, 1, 0));
 	vec3 color = vec3(0.0);
-	for (int i = 0; i < 99; i++) {
+	for (int i = 0; i < 200; i++) {
 		float dist = map(cameraPosition);
-		if (dist < 0.0001) {
+		if (dist < 0.00001) {
 			vec3 normal = normal(cameraPosition);
 			float level = dot(normal, lightDirection);
 			color = vec3(level / 2 + 0.3) + vec3(0.1, 0.2, 0.4);
