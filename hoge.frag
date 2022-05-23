@@ -30,7 +30,7 @@ vec3 trans(vec3 p)
 
 float d_cube(vec3 pos)
 {
-	return length(max(abs(pos) - vec3(1.0, 1.0, 1.0), 0.0));
+	return length(max(abs(pos) - vec3(1.0, 1.0, 1.0), 0.0)) - 0.2;
 }
 
 float d_sphere(vec3 pos)
@@ -62,16 +62,18 @@ void main()
 {
 	vec2 position = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
 	vec3 cameraPosition = vec3(0.0, 0.0, 10.0);
-	float screenZ = 5.0;
-	vec3 lightDirection = normalize(vec3(2.0, 8.0, 1.0));
+	float screenZ = 6.0;
+	vec3 lightDirection = normalize(vec3(2.0, 8.0, 10.0));
 	vec3 rayDirection = normalize(vec3(position, screenZ) - cameraPosition);
 	float r = 6.283 * time * 10;
 	cameraPosition = rotate(cameraPosition, -0.5, vec3(1, 0, 0));
 	rayDirection = rotate(rayDirection, -0.5, vec3(1, 0, 0));
 	cameraPosition = rotate(cameraPosition, r, vec3(0, 1, 0));
 	rayDirection = rotate(rayDirection, r, vec3(0, 1, 0));
+	lightDirection = rotate(lightDirection, r, vec3(0, 1, 0));
+	cameraPosition = cameraPosition + vec3(0, -0.8, 0);
 	vec3 color = vec3(0.0);
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 300; i++) {
 		float dist = map(cameraPosition);
 		if (dist < 0.0001) {
 			vec3 normal = normal(cameraPosition);
