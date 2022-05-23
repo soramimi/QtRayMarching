@@ -10,6 +10,8 @@ GLWidget::GLWidget(QWidget *parent)
 			<< 1.0f << 1.0f << 1.0f
 			<< -1.0f << 1.0f << 1.0f
 			<< -1.0f << -1.0f << 1.0f;
+
+	startTimer(16);
 }
 
 GLWidget::~GLWidget()
@@ -43,8 +45,15 @@ void GLWidget::paintGL()
 	glClear(GL_COLOR_BUFFER_BIT);
 	program_->bind();
 	vao_.bind();
+	program_->setUniformValue("time", float(time_ / 3600.0));
 	program_->setUniformValue("resolution", QVector2D(width(), height()));
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size() / 3); //ドローコール
 	vao_.release();
 	program_->release();
+}
+
+void GLWidget::timerEvent(QTimerEvent *event)
+{
+	time_ = (time_ + 1) % 3600;
+	update();
 }
