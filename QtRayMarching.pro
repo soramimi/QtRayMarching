@@ -1,5 +1,9 @@
 QT += core gui widgets opengl
 
+greaterThan(QT_MAJOR_VERSION, 5) {
+	QT += openglwidgets
+}
+
 CONFIG += c++17
 
 SOURCES += \
