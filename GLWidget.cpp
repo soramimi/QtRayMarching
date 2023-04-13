@@ -4,12 +4,10 @@ GLWidget::GLWidget(QWidget *parent)
 	: QOpenGLWidget(parent)
 {
 	vertices_
-			<< -1.0f << -1.0f << 1.0f
-			<< 1.0f << -1.0f << 1.0f
-			<< 1.0f << 1.0f << 1.0f
-			<< 1.0f << 1.0f << 1.0f
-			<< -1.0f << 1.0f << 1.0f
-			<< -1.0f << -1.0f << 1.0f;
+		<< -1.0f << -1.0f << 1.0f
+		<< 1.0f << -1.0f << 1.0f
+		<< 1.0f << 1.0f << 1.0f
+		<< -1.0f << 1.0f << 1.0f;
 
 	startTimer(16);
 }
@@ -47,7 +45,7 @@ void GLWidget::paintGL()
 	vao_.bind();
 	program_->setUniformValue("time", float(time_ / 3600.0));
 	program_->setUniformValue("resolution", QVector2D(width(), height()));
-	glDrawArrays(GL_TRIANGLES, 0, vertices_.size() / 3); //ドローコール
+	glDrawArrays(GL_TRIANGLE_FAN, 0, vertices_.size() / 3); //ドローコール
 	vao_.release();
 	program_->release();
 }
